@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>210807</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="add-user">
+      <input v-model="userName"><button @click="addUser(userName)">추가</button>
+    </div>
+    <div>
+      <div v-if="isEmpty">
+        사용자가 없습니다.
+      </div>
+      <ul v-else>
+        <li v-for="(name, index) in userList" :key="index">{{name}}</li>
+      </ul>
+    </div>
+	</div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          userList:[],
+          userName: ""
+        }
+      },
+      methods: {
+        addUser(name) {
+          this.userList.push(name);
+        }
+      },
+      computed: {
+        isEmpty() {
+          return this.userList.length==0;
+        }
+      }
+    })
+  </script>
+  <style scoped>
+    .add-user {
+      height: 40px;
+      align-items: center;
+      display: flex;
+    }
+    .add-user > * {
+      height: 100%;
+    }
+    .add-user > input {
+      box-sizing: border-box;
+      flex: 1;
+    }
+    ul {
+      text-align: left;
+    }
+</body>
+</html>
